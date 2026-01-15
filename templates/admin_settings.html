@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Settings - Admin Dashboard{% endblock %}
+
+{% block content %}
+<h1>Admin Settings</h1>
+<div style="margin-bottom: 1.5rem;">
+    <a href="{{ url_for('admin_dashboard') }}" class="btn secondary">← Back to Dashboard</a>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 600px;">
+    <!-- WhatsApp Settings -->
+    <div class="custom-order-form">
+        <h2>📱 WhatsApp Contact Number</h2>
+        <form method="POST" action="{{ url_for('admin_settings') }}">
+            <input type="hidden" name="form_type" value="whatsapp">
+            <label for="whatsapp_number">WhatsApp Number (with country code)</label>
+            <input type="tel" id="whatsapp_number" name="whatsapp_number" value="{{ current_number }}" placeholder="e.g., 8132981738" required>
+            <small style="display: block; margin-top: -0.8rem; margin-bottom: 1rem; color: #666;">
+                Enter the number without any symbols (just digits)
+            </small>
+            <button type="submit" class="btn">Save WhatsApp Number</button>
+        </form>
+    </div>
+
+    <!-- Account Settings -->
+    <div class="custom-order-form">
+        <h2>🔐 Account Settings</h2>
+        <form method="POST" action="{{ url_for('admin_settings') }}">
+            <input type="hidden" name="form_type" value="account">
+            
+            <label for="new_username">New Username</label>
+            <input type="text" id="new_username" name="new_username" placeholder="Leave blank to keep current" minlength="3">
+            
+            <label for="current_password">Current Password (required to make changes)</label>
+            <input type="password" id="current_password" name="current_password" placeholder="Enter your current password" required>
+            
+            <label for="new_password">New Password</label>
+            <input type="password" id="new_password" name="new_password" placeholder="Leave blank to keep current" minlength="6">
+            
+            <label for="confirm_password">Confirm New Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm new password">
+            
+            <small style="display: block; margin-top: -0.8rem; margin-bottom: 1rem; color: #666;">
+                Passwords must be at least 6 characters long
+            </small>
+            <button type="submit" class="btn">Update Account</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,380 @@
+"""
+TESTING & VERIFICATION GUIDE
+Handcrafted Baskets Website
+============================
+
+This document provides a complete testing checklist for the website.
+Run through these tests before deploying to production.
+"""
+
+# TEST SETUP
+# ==========
+# 1. Start Flask app: python app.py
+# 2. Open browser to http://localhost:5000
+# 3. Open browser console (F12) to check for JavaScript errors
+
+# FRONTEND TESTS
+# ==============
+
+print("=" * 50)
+print("FRONTEND TESTS")
+print("=" * 50)
+
+# HOME PAGE TESTS
+print("\n[HOME PAGE] /")
+print("✓ Page loads without errors")
+print("✓ Hero section visible with tagline")
+print("✓ Featured Products section displays")
+print("✓ 'View Products' button visible and clickable")
+print("✓ 'Custom Order' button visible and clickable")
+print("✓ 'Contact via WhatsApp' button visible")
+print("✓ Navigation header is visible and responsive")
+print("✓ Footer is visible with copyright")
+print("✓ All fonts render correctly (min 16px)")
+print("✓ No console errors")
+print("✓ Mobile: All buttons are thumb-friendly (44px+ height)")
+print("✓ Mobile: No horizontal scrolling")
+print("✓ Tablet: Layout adapts to medium screen")
+print("✓ Desktop: 3-column grid for featured products")
+
+# PRODUCTS PAGE TESTS
+print("\n[PRODUCTS PAGE] /products")
+print("✓ Page loads without errors")
+print("✓ Grid layout displays properly")
+print("✓ Mobile: 1 column grid")
+print("✓ Tablet: 2 column grid")
+print("✓ Desktop: 3 column grid")
+print("✓ Each product card shows: image, name, price, availability")
+print("✓ Availability badges display correctly (Available/Out of Stock/Made to Order)")
+print("✓ 'View' button opens product detail page")
+print("✓ 'Add' button adds product to cart")
+print("✓ All images load properly")
+print("✓ No broken images or 404 errors")
+print("✓ Product links are working")
+
+# PRODUCT DETAIL PAGE TESTS
+print("\n[PRODUCT DETAIL PAGE] /product/<id>")
+print("✓ Page loads with correct product")
+print("✓ Large product image displays")
+print("✓ Product name, description, price visible")
+print("✓ Size and color info display (if available)")
+print("✓ Availability badge shows correct status")
+print("✓ 'Add to Cart' button works")
+print("✓ 'Back to Products' button returns to /products")
+print("✓ No layout issues on mobile")
+
+# SHOPPING CART TESTS
+print("\n[SHOPPING CART] /cart")
+print("✓ Cart page accessible")
+print("✓ Add product to cart (from /products)")
+print("✓ Product appears in cart with name, quantity, price")
+print("✓ Total price calculated correctly")
+print("✓ Can remove items from cart")
+print("✓ Empty cart shows 'Your cart is empty'")
+print("✓ Cart persists after page refresh (session)")
+print("✓ 'Order via WhatsApp' button visible")
+print("✓ WhatsApp button opens WhatsApp with message")
+print("✓ Message contains: product names, quantities, prices, total")
+print("✓ Message is editable in WhatsApp before sending")
+
+# CUSTOM ORDER PAGE TESTS
+print("\n[CUSTOM ORDER] /custom_order")
+print("✓ Form loads with all fields")
+print("✓ Fields present: product_type, material, color, occasion, size, notes")
+print("✓ Fields present: name (required), phone (required)")
+print("✓ Form submission works")
+print("✓ Success message appears: 'Custom order submitted'")
+print("✓ Order saved to database (check admin dashboard)")
+print("✓ Form validation: name field required")
+print("✓ Form validation: phone field required")
+print("✓ Mobile: Form fields are large and clickable")
+
+# PAGES TESTS
+print("\n[ABOUT PAGE] /about")
+print("✓ Page loads and displays")
+print("✓ Content visible")
+
+print("\n[CONTACT PAGE] /contact")
+print("✓ Page loads")
+print("✓ WhatsApp button visible and working")
+print("✓ Phone number displays")
+print("✓ Location field shows (or placeholder)")
+print("✓ Business hours display")
+
+# ADMIN TESTS
+# ============
+
+print("\n" + "=" * 50)
+print("ADMIN TESTS")
+print("=" * 50)
+
+print("\n[ADMIN LOGIN] /admin/login")
+print("✓ Login page accessible")
+print("✓ Form has username and password fields")
+print("✓ Login with default credentials works (admin/password)")
+print("✓ Invalid login shows error message")
+print("✓ Redirect to admin dashboard after login")
+
+print("\n[ADMIN DASHBOARD] /admin/dashboard")
+print("✓ Dashboard accessible after login")
+print("✓ Product list displays")
+print("✓ 'Add New Product' button visible")
+print("✓ 'Logout' button visible and works")
+print("✓ Custom orders section shows all orders")
+print("✓ Each order shows: name, phone, type, color, size, occasion, notes, date")
+
+print("\n[ADD PRODUCT] /admin/product/new")
+print("✓ Add product page loads")
+print("✓ All fields present: name, description, price, image, availability, size, color")
+print("✓ Image upload works (test with JPG/PNG)")
+print("✓ Form submission creates new product")
+print("✓ Product appears on /products page immediately")
+print("✓ Product appears in admin dashboard")
+print("✓ File validation: rejects large files (>16MB)")
+print("✓ File security: uploaded files in /uploads folder")
+
+print("\n[EDIT PRODUCT] /admin/product/edit/<id>")
+print("✓ Edit page loads with product data")
+print("✓ All fields pre-populated correctly")
+print("✓ Can update name, description, price")
+print("✓ Can change availability status")
+print("✓ Can upload new image")
+print("✓ Changes save correctly")
+print("✓ Updated product reflects on website immediately")
+
+print("\n[DELETE PRODUCT] /admin/product/delete/<id>")
+print("✓ Delete button functional")
+print("✓ Product removed from database")
+print("✓ Product no longer appears on website")
+print("✓ Image file deleted from /uploads folder")
+
+# FUNCTIONALITY TESTS
+# ===================
+
+print("\n" + "=" * 50)
+print("FUNCTIONALITY TESTS")
+print("=" * 50)
+
+print("\n[SHOPPING CART FUNCTIONALITY]")
+print("✓ Add to cart: quantity increments correctly")
+print("✓ Multiple products: cart shows all items")
+print("✓ Cart persists: refresh page, cart still there")
+print("✓ Remove from cart: item deleted correctly")
+print("✓ Total calculation: accurate with multiple items")
+print("✓ Clear cart: after checkout (optional)")
+
+print("\n[WHATSAPP INTEGRATION]")
+print("✓ WhatsApp link format correct: https://wa.me/[number]")
+print("✓ WhatsApp message auto-fills with cart contents")
+print("✓ Message is readable and formatted nicely")
+print("✓ Custom order page can link to WhatsApp (optional)")
+print("✓ Contact page WhatsApp link works")
+
+print("\n[DATABASE]")
+print("✓ Products table stores data correctly")
+print("✓ Custom orders saved with all fields")
+print("✓ Admin credentials stored securely (password hash)")
+print("✓ Database persists after app restart")
+print("✓ No duplicate entries created")
+
+print("\n[SESSION & CART]")
+print("✓ Session-based cart works without login")
+print("✓ Cart accessible across pages")
+print("✓ Cart clears when browser session ends (optional)")
+print("✓ No personal data stored in cookies")
+
+# BROWSER COMPATIBILITY TESTS
+# ============================
+
+print("\n" + "=" * 50)
+print("BROWSER COMPATIBILITY")
+print("=" * 50)
+
+print("\nDesktop Browsers:")
+print("✓ Chrome/Edge (latest)")
+print("✓ Firefox (latest)")
+print("✓ Safari (latest)")
+
+print("\nMobile Browsers:")
+print("✓ Chrome Mobile")
+print("✓ Safari iOS")
+print("✓ Samsung Internet")
+
+print("\nTablet Browsers:")
+print("✓ iPad Safari")
+print("✓ Android Chrome")
+
+# RESPONSIVE DESIGN TESTS
+# =======================
+
+print("\n" + "=" * 50)
+print("RESPONSIVE DESIGN")
+print("=" * 50)
+
+print("\nMobile (320px - 640px):")
+print("✓ Single column layouts")
+print("✓ Navigation dropdown/mobile-friendly")
+print("✓ Buttons full-width or thumb-friendly")
+print("✓ No horizontal scroll")
+print("✓ Touch-friendly (min 44px tap targets)")
+print("✓ Images scale properly")
+print("✓ Text readable without zoom")
+
+print("\nTablet (641px - 1024px):")
+print("✓ 2-column product grid")
+print("✓ Optimized spacing")
+print("✓ All content accessible")
+print("✓ Navigation visible")
+
+print("\nDesktop (1025px+):")
+print("✓ 3-column product grid")
+print("✓ Full navigation visible")
+print("✓ Wider content area")
+print("✓ Optimal readability")
+
+# ACCESSIBILITY TESTS
+# ===================
+
+print("\n" + "=" * 50)
+print("ACCESSIBILITY")
+print("=" * 50)
+
+print("✓ All images have alt text")
+print("✓ Form labels associated with inputs")
+print("✓ Buttons have proper text/labels")
+print("✓ Color contrast sufficient (dark text on light background)")
+print("✓ No reliance on color alone to convey information")
+print("✓ Keyboard navigation works (Tab key)")
+print("✓ Focus indicators visible")
+print("✓ Links have descriptive text")
+
+# PERFORMANCE TESTS
+# =================
+
+print("\n" + "=" * 50)
+print("PERFORMANCE")
+print("=" * 50)
+
+print("✓ Pages load quickly (<3 seconds)")
+print("✓ No console errors or warnings")
+print("✓ Images optimized (not unnecessarily large)")
+print("✓ CSS/JS files minified (optional)")
+print("✓ Database queries efficient")
+print("✓ No memory leaks in JavaScript")
+print("✓ No 404 errors for resources")
+print("✓ No mixed content (HTTPS) warnings")
+
+# SECURITY TESTS
+# ==============
+
+print("\n" + "=" * 50)
+print("SECURITY")
+print("=" * 50)
+
+print("✓ Admin password hashed (not plain text)")
+print("✓ Session secure (httpOnly, Secure flags)")
+print("✓ CSRF protection enabled (session-based)")
+print("✓ File upload validation (safe file types)")
+print("✓ File size limit enforced (16MB max)")
+print("✓ SQL injection prevention (SQLAlchemy ORM)")
+print("✓ XSS prevention (template escaping)")
+print("✓ Admin pages require login")
+print("✓ No sensitive data in URLs")
+print("✓ SECRET_KEY changed from default (in production)")
+
+# BUG FIXES CHECKLIST
+# ===================
+
+print("\n" + "=" * 50)
+print("BUG FIXES & EDGE CASES")
+print("=" * 50)
+
+print("\n[CART EDGE CASES]")
+print("✓ Empty cart doesn't crash")
+print("✓ Invalid product ID doesn't crash")
+print("✓ Negative quantities not possible")
+print("✓ Very large quantities handled")
+print("✓ Decimal prices calculated correctly")
+
+print("\n[FORM VALIDATION]")
+print("✓ Required fields enforced")
+print("✓ Phone number format accepted (various formats)")
+print("✓ Empty form submission prevented")
+print("✓ XSS attempts in fields sanitized")
+
+print("\n[IMAGE HANDLING]")
+print("✓ Missing images don't break layout")
+print("✓ Large images handled correctly")
+print("✓ Various image formats accepted (jpg, png, webp)")
+print("✓ Duplicate filenames handled (renamed)")
+
+print("\n[DATABASE]")
+print("✓ Database doesn't crash with many products")
+print("✓ Large descriptions handled")
+print("✓ Special characters in product names work")
+print("✓ Concurrent orders don't conflict")
+
+print("\n[ERROR HANDLING]")
+print("✓ 404 pages for missing products")
+print("✓ 500 error handled gracefully")
+print("✓ Database errors don't expose system info")
+print("✓ File upload errors show user-friendly messages")
+
+# PRODUCTION READINESS
+# ====================
+
+print("\n" + "=" * 50)
+print("PRODUCTION READINESS")
+print("=" * 50)
+
+print("PRE-DEPLOYMENT CHECKLIST:")
+print("✓ Change admin password")
+print("✓ Change SECRET_KEY")
+print("✓ Set DEBUG = False")
+print("✓ Update WHATSAPP_NUMBER")
+print("✓ Create .env file with secrets")
+print("✓ Backup database backup mechanism")
+print("✓ Setup HTTPS certificate")
+print("✓ Configure production WSGI server (Gunicorn)")
+print("✓ Setup nginx reverse proxy")
+print("✓ Configure logging")
+print("✓ Test on production environment")
+print("✓ Have rollback plan")
+print("✓ Document deployment process")
+
+# TEST RESULTS TEMPLATE
+# =====================
+
+print("\n" + "=" * 50)
+print("TEST RESULTS SUMMARY")
+print("=" * 50)
+
+print("""
+Date Tested: [DATE]
+Tester: [NAME]
+Environment: [Development/Staging/Production]
+
+Total Tests: 150+
+Passed: [ ]
+Failed: [ ]
+Blocked: [ ]
+
+Critical Issues Found:
+- [Issue 1]
+- [Issue 2]
+
+Minor Issues Found:
+- [Issue 1]
+- [Issue 2]
+
+Recommendations:
+- [Recommendation 1]
+- [Recommendation 2]
+
+Status: [READY FOR DEPLOYMENT / NEEDS FIXES]
+Sign Off: ___________________
+""")
+
+print("=" * 50)
+print("END OF TESTING GUIDE")
+print("=" * 50)

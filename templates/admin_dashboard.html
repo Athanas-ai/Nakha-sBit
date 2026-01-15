@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - Handcrafted Baskets{% endblock %}
+
+{% block content %}
+<h1>Admin Dashboard</h1>
+<div style="margin-bottom: 1.5rem;">
+    <a href="{{ url_for('admin_new_product') }}" class="btn">+ Add New Product</a>
+    <a href="{{ url_for('admin_settings') }}" class="btn secondary">⚙️ Settings</a>
+    <a href="{{ url_for('admin_logout') }}" class="btn secondary">Logout</a>
+</div>
+
+<h2>Products ({{ products|length }})</h2>
+<div class="product-grid">
+    {% for product in products %}
+    <div class="product-card">
+        {% if product.image %}
+        <img src="{{ url_for('uploaded_file', filename=product.image) }}" alt="{{ product.name }}">
+        {% endif %}
+        <div class="product-info">
+            <h3>{{ product.name }}</h3>
+            <p class="price">₹{{ "%.2f"|format(product.price) }}</p>
+            <span class="availability {{ product.availability }}">{{ product.availability.replace('_', ' ').title() }}</span>
+            <div class="product-actions">
+                <a href="{{ url_for('admin_edit_product', id=product.id) }}" class="btn small secondary">Edit</a>
+                <a href="{{ url_for('admin_delete_product', id=product.id) }}" onclick="return confirm('Delete this product?')" class="btn small danger">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<h2>Custom Orders ({{ orders|length }})</h2>
+<div class="orders">
+    {% if orders %}
+        {% for order in orders %}
+        <div class="order">
+            <p><strong>{{ order.name }}</strong></p>
+            <p>📞 {{ order.phone }}</p>
+            <p>📦 {{ order.product_type.title() }}</p>
+            {% if order.color %}<p>🎨 Color: {{ order.color }}</p>{% endif %}
+            {% if order.size %}<p>📐 Size: {{ order.size }}</p>{% endif %}
+            {% if order.occasion %}<p>🎉 Occasion: {{ order.occasion }}</p>{% endif %}
+            {% if order.notes %}<p>📝 Notes: {{ order.notes }}</p>{% endif %}
+            <p style="font-size: 0.9rem; color: #666;">{{ order.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No custom orders yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,264 @@
+"""
+QUICK START GUIDE - Handcrafted Baskets
+======================================
+
+This file provides step-by-step instructions to get the website running.
+"""
+
+# STEP 1: Install Python packages
+# ================================
+# Run this command from the project folder:
+#
+# pip install -r requirements.txt
+#
+# OR install manually:
+#
+# pip install Flask Flask-SQLAlchemy Werkzeug
+
+# STEP 2: Start the Flask app
+# ============================
+# python app.py
+#
+# The website will be available at: http://localhost:5000
+
+# STEP 3: Set your WhatsApp number
+# =================================
+# Edit config.py and change:
+# WHATSAPP_NUMBER = '1234567890'
+# to your actual WhatsApp number with country code
+# Example: '919876543210' (India +91 = 91)
+
+# STEP 4: Admin Panel Access
+# ===========================
+# Go to: http://localhost:5000/admin/login
+# Default credentials:
+#   Username: admin
+#   Password: password
+#
+# IMPORTANT: Change the password immediately!
+# Edit app.py and run:
+#
+# python -c "
+# from app import app, db
+# from models import Admin
+# from werkzeug.security import generate_password_hash
+# with app.app_context():
+#     admin = Admin.query.filter_by(username='admin').first()
+#     if admin:
+#         admin.password_hash = generate_password_hash('YourNewPassword123')
+#         db.session.commit()
+# "
+
+# STEP 5: Add Products
+# ====================
+# 1. Login to admin panel (/admin/login)
+# 2. Click "Add New Product"
+# 3. Fill in:
+#    - Name: Basket name
+#    - Description: Product details
+#    - Price: Cost in your currency
+#    - Image: Upload product photo (JPG/PNG)
+#    - Availability: Available / Out of Stock / Made to Order
+#    - Size: Optional (e.g., "Medium", "30cm")
+#    - Color: Optional (e.g., "Natural", "Brown")
+# 4. Click Save
+# 5. Product appears on website immediately
+
+# STEP 6: Test Features
+# ======================
+# Home Page (/):
+#   - Check if featured products display
+#   - Try "View Products" button
+#
+# Products Page (/products):
+#   - See all products in grid
+#   - Click product to see details
+#   - "Add to Cart" button works
+#
+# Shopping Cart (/cart):
+#   - Add 1-2 products
+#   - View cart
+#   - Click "Order via WhatsApp"
+#   - WhatsApp opens with order details
+#
+# Custom Order (/custom_order):
+#   - Fill form with test data
+#   - Submit
+#   - Message appears: "Custom order submitted"
+#   - Admin can see order in dashboard
+#
+# Admin Dashboard (/admin/dashboard):
+#   - All products listed
+#   - Can edit/delete products
+#   - All custom orders shown
+#   - Order includes customer name and phone
+
+# STEP 7: Configuration (Production Ready)
+# =========================================
+# Before deploying, update config.py:
+
+# 1. Change SECRET_KEY (used for session security):
+#    SECRET_KEY = 'generate-a-random-string-here'
+#    (Use: import secrets; print(secrets.token_hex(32)))
+
+# 2. Set WhatsApp number:
+#    WHATSAPP_NUMBER = '919876543210'  # Your actual number
+
+# 3. Change admin password (see STEP 4)
+
+# 4. Use environment variables for production:
+#    Create .env file:
+#
+#    SECRET_KEY=your-secret-key
+#    WHATSAPP_NUMBER=919876543210
+#    DEBUG=False
+
+# STEP 8: Deployment (Simple Server)
+# ===================================
+# For hosting on a simple VPS or cloud server:
+#
+# 1. Install Gunicorn (production WSGI server):
+#    pip install gunicorn
+#
+# 2. Run with:
+#    gunicorn --bind 0.0.0.0:5000 app:app
+#
+# 3. For production domain, use nginx as reverse proxy
+#
+# 4. Use HTTPS with Let's Encrypt certificate
+
+# TROUBLESHOOTING
+# ===============
+
+# Issue: "Module not found" error
+# Solution: Run: pip install -r requirements.txt
+
+# Issue: Database error
+# Solution: Delete baskets.db and restart app.py
+
+# Issue: Admin login fails
+# Solution: 
+#   python -c "from app import app, db; app.app_context().push(); db.create_all()"
+
+# Issue: Products not showing
+# Solution: Make sure you're in admin panel (/admin/login) and added products
+
+# Issue: WhatsApp link doesn't work
+# Solution: Check WHATSAPP_NUMBER in config.py (must include country code)
+#           Test format: https://wa.me/919876543210
+
+# Issue: Images not uploading
+# Solution: Check /uploads folder has write permissions
+
+# DATABASE RESET (If needed)
+# ==========================
+# To start fresh with empty database:
+# 1. Delete baskets.db file
+# 2. Restart app.py
+# 3. New database will be created automatically
+
+# FILE STRUCTURE REFERENCE
+# ========================
+# baskets/
+# ├── app.py                      ← Main Flask application
+# ├── models.py                   ← Database models
+# ├── config.py                   ← Configuration settings
+# ├── requirements.txt            ← Python dependencies
+# ├── README.md                   ← Full documentation
+# ├── QUICKSTART.txt              ← This file
+# ├── templates/                  ← HTML files
+# │   ├── base.html              ← Base layout
+# │   ├── home.html              ← Homepage
+# │   ├── products.html          ← Products listing
+# │   ├── product_detail.html    ← Product page
+# │   ├── cart.html              ← Shopping cart
+# │   ├── custom_order.html      ← Custom order form
+# │   ├── about.html             ← About page
+# │   ├── contact.html           ← Contact page
+# │   ├── admin_login.html       ← Admin login
+# │   ├── admin_dashboard.html   ← Admin dashboard
+# │   └── admin_product_form.html ← Add/Edit product
+# ├── static/                     ← CSS & JavaScript
+# │   ├── style.css              ← All styles (mobile-first)
+# │   └── script.js              ← Minimal JavaScript
+# ├── uploads/                    ← Product images (auto-created)
+# └── baskets.db                  ← Database (auto-created)
+
+# KEY PAGES
+# =========
+# User Pages:
+#   http://localhost:5000/                 ← Home
+#   http://localhost:5000/products         ← All products
+#   http://localhost:5000/product/<id>     ← Product details
+#   http://localhost:5000/cart             ← Shopping cart
+#   http://localhost:5000/custom_order     ← Custom order form
+#   http://localhost:5000/about            ← About artisan
+#   http://localhost:5000/contact          ← Contact info
+#
+# Admin Pages:
+#   http://localhost:5000/admin/login      ← Admin login
+#   http://localhost:5000/admin/dashboard  ← Manage products & orders
+
+# FEATURES SUMMARY
+# ================
+# ✅ Mobile-first responsive design
+# ✅ Product catalog with images
+# ✅ Shopping cart (session-based)
+# ✅ WhatsApp integration for orders
+# ✅ Custom order requests
+# ✅ Admin panel to manage products
+# ✅ Lightweight (no heavy frameworks)
+# ✅ SQLite database (self-contained)
+# ✅ Production-ready
+# ✅ Easy to customize
+
+# CUSTOMIZATION EXAMPLES
+# ======================
+
+# Change brand name:
+# 1. Edit templates/base.html <title> tags
+# 2. Edit .logo text in static/style.css
+# 3. Edit footer text in templates/base.html
+
+# Change colors:
+# Edit static/style.css:
+#   Primary color: #8B7355 → change to your color
+#   Accent (WhatsApp): #25D366 → keep or change
+#   Background: #f9f9f9 → lighter/darker as needed
+
+# Add footer links:
+# Edit templates/base.html footer section
+
+# Change availability badges:
+# Edit templates/product_detail.html and products.html
+
+# PERFORMANCE TIPS
+# ================
+# 1. Optimize images (use WebP format, compress)
+# 2. Enable browser caching
+# 3. Use a CDN for images (optional)
+# 4. Monitor database size (backup regularly)
+# 5. Clear old custom orders periodically
+
+# SECURITY NOTES
+# ==============
+# 1. Change SECRET_KEY in production
+# 2. Change admin password
+# 3. Use HTTPS in production
+# 4. Validate all file uploads
+# 5. Don't expose database in public folders
+# 6. Use environment variables for secrets
+# 7. Regular backups of database
+
+# NEED HELP?
+# ==========
+# 1. Check README.md for detailed documentation
+# 2. Review error messages in terminal
+# 3. Clear browser cache if pages look wrong
+# 4. Ensure all dependencies installed: pip install -r requirements.txt
+# 5. Restart Flask app if changes don't appear
+
+print("✅ Handcrafted Baskets - Ready to go!")
+print("📍 Start with: python app.py")
+print("🌐 Visit: http://localhost:5000")
+print("👨‍💻 Admin: http://localhost:5000/admin/login")

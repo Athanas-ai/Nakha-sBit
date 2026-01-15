@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Custom Order - Handcrafted Baskets{% endblock %}
+
+{% block content %}
+<h1>Custom / Special Order</h1>
+<p>For gifts, birthdays, special requests. Custom orders may take extra time and additional charges.</p>
+<form method="post" class="custom-order-form">
+    <label for="product_type">Product Type:</label>
+    <select name="product_type" required>
+        <option value="basket">Basket</option>
+        <option value="gift">Gift</option>
+        <option value="storage">Storage</option>
+    </select>
+    
+    <label for="material">Material Preference:</label>
+    <input type="text" name="material">
+    
+    <label for="color">Color Preference:</label>
+    <input type="text" name="color">
+    
+    <label for="occasion">Occasion:</label>
+    <input type="text" name="occasion">
+    
+    <label for="size">Size:</label>
+    <input type="text" name="size">
+    
+    <label for="notes">Extra Notes:</label>
+    <textarea name="notes"></textarea>
+    
+    <label for="name">Your Name:</label>
+    <input type="text" name="name" required>
+    
+    <label for="phone">Phone Number:</label>
+    <input type="tel" name="phone" required>
+    
+    <button type="submit" class="btn">Submit Order</button>
+</form>
+{% endblock %}

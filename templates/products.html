@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Products - Handcrafted Baskets{% endblock %}
+
+{% block content %}
+<h1>Our Products</h1>
+<div class="product-grid">
+    {% for product in products %}
+    <div class="product-card">
+        {% if product.image %}
+        <img src="{{ url_for('uploaded_file', filename=product.image) }}" alt="{{ product.name }}">
+        {% endif %}
+        <div class="product-info">
+            <h3>{{ product.name }}</h3>
+            <p class="price">₹{{ "%.2f"|format(product.price) }}</p>
+            <span class="availability {{ product.availability }}">{{ product.availability.replace('_', ' ').title() }}</span>
+            <div class="product-actions">
+                <a href="{{ url_for('product_detail', id=product.id) }}" class="btn small secondary">View</a>
+                <a href="{{ url_for('add_to_cart', id=product.id) }}" class="btn small">Add</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

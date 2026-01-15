@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login - Handcrafted Baskets{% endblock %}
+
+{% block content %}
+<h1>Admin Login</h1>
+<form method="post" class="login-form">
+    <label for="username">Username:</label>
+    <input type="text" name="username" required>
+    
+    <label for="password">Password:</label>
+    <input type="password" name="password" required>
+    
+    <button type="submit" class="btn">Login</button>
+</form>
+{% endblock %}
